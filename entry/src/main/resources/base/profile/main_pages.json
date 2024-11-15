@@ -1,0 +1,29 @@
+{
+  "src": [
+    "pages/2024-11-11/About",
+    "pages/2024-11-11/ChatPage",
+    "pages/2024-11-11/Index",
+    "pages/2024-11-11/IndexPage",
+    "pages/2024-11-11/StartPage",
+    "pages/2024-11-11/Index1_24_11_11",
+    "pages/2024-11-11/Index2_24_11_22",
+    "pages/2024-11-11/Index3_24_11_11",
+    "pages/2024-11-11/Index4_24_11_11",
+    "pages/2024-11-11/Index5_24_11_11",
+    "pages/2024-11-11/Index6_24_11_11",
+    "pages/2024-11-12/learn/Noti",
+    "pages/2024-11-12/learn/Remi",
+    "pages/2024-11-12/RemiPage",
+    "pages/2024-11-12/learn/AlarmClock",
+    "pages/2024-11-12/learn/AddClock",
+    "pages/2024-11-12/learn/ClockRepeat",
+    "pages/2024-11-13/learn/Index1_2024_11_13",
+    "pages/2024-11-13/WinPage",
+    "pages/2024-11-13/NewWinPage",
+    "pages/2024-11-13/learn/Index2_2024_11_13",
+    "pages/2024-11-13/learn/H1_2024_11_13",
+    "pages/2024-11-13/learn/H1_Chat",
+    "pages/2024-11-13/learn/H2_2024_11_13",
+    "pages/2024-11-14/learn/H1_2024_11_15"
+  ]
+}
