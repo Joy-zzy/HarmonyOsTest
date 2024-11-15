@@ -23,6 +23,7 @@ struct H1_2024_11_15 {
         })
       Button('获取屏幕的可折叠状态')
         .onClick(async () => {
+          console.log('123');
         })
     }
 
