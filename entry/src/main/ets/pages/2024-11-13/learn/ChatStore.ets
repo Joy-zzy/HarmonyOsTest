@@ -1,5 +1,6 @@
 import dataPreferences from '@ohos.data.preferences';
 import { Context } from '@ohos.arkui.UIContext';
+import { util } from '@kit.ArkTS';
 
 export class Chat {
   isSelf: boolean = true;
@@ -47,7 +48,7 @@ export class Store {
 }
 
 export let businessList: Business[] = [{
-  id: Date.now() + "1",
+  id: util.generateRandomUUID() ,
   title: "天猫超市",
   ava: "/images/1-1.png",
   replayTime: "13:10",
@@ -55,7 +56,7 @@ export let businessList: Business[] = [{
   replyMsg: "",
   count: 0
 }, {
-  id: Date.now() + "2",
+  id: util.generateRandomUUID(),
   title: "EMXEE嫚熙官方旗舰店",
   ava: "/images/2.png",
   replayTime: "星期一",
@@ -63,7 +64,7 @@ export let businessList: Business[] = [{
   replyMsg: "",
   count: 0
 }, {
-  id: Date.now() + "3",
+  id: util.generateRandomUUID(),
   title: "88VIP权益助手",
   ava: "/images/3.png",
   replayTime: "星期一",
@@ -71,7 +72,7 @@ export let businessList: Business[] = [{
   replyMsg: "",
   count: 0
 }, {
-  id: Date.now() + "4",
+  id: util.generateRandomUUID(),
   title: "老管家旗舰店",
   ava: "/images/4.png",
   replayTime: "星期一",

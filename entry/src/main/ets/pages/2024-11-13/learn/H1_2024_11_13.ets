@@ -1,17 +1,23 @@
 import { Business, businessList, Store } from './ChatStore'
-import { promptAction, router } from '@kit.ArkUI';
+import { display, promptAction, router, window } from '@kit.ArkUI';
 import { notificationManager } from '@kit.NotificationKit';
 import Base from '@ohos.base';
+import { util } from '@kit.ArkTS';
+
+PersistentStorage.persistProp<Business[]>('busList', businessList);
 
 @Entry
 @Component
 struct H1_2024_11_13 {
 
-  @State busList: Business[] = businessList;
+  @StorageLink('busList') busList: Business[] = businessList;
   @StorageProp('bus') @Watch('change') business: Business | undefined = undefined;
   @State search: string = '';
   store: Store = new Store(getContext(this));
+  @State top: number = 0;
+  displayClass: display.Display | undefined = undefined;
   @State searchList: Business[] = [];
+  winClass: window.Window | undefined = undefined;
 
   change() {
     if (this.business) {
@@ -22,6 +28,9 @@ struct H1_2024_11_13 {
   }
 
   async aboutToAppear() {
+    this.winClass = await window.getLastWindow(getContext(this));
+    this.winClass!.setWindowLayoutFullScreen(true);
+    this.displayClass = display.getDefaultDisplaySync();
     let isNotificationEnabled = notificationManager.isNotificationEnabledSync()
     if(!isNotificationEnabled) {
       //弹框授权允许通知；
@@ -56,7 +65,7 @@ struct H1_2024_11_13 {
                 let chat = res[i];
                 if (chat.msg.includes(this.search)) {
                   this.searchList.push({
-                    id: Date.now() + "",
+                    id: util.generateRandomUUID(),
                     title: bus.title,
                     ava: bus.ava,
                     replayTime: chat.time,
@@ -68,7 +77,7 @@ struct H1_2024_11_13 {
               }
             }
           })
-      }.padding({left: 10, right: 10})
+      }.padding({left: 10, right: 10, top: 25})
       List() {
         ForEach(this.search == '' ? this.busList : this.searchList, (business: Business) => {
           ListItem() {
@@ -101,7 +110,7 @@ struct H1_2024_11_13 {
             })
           })
         })
-      }
+      }.layoutWeight(1)
     }
   }
 }

@@ -36,7 +36,7 @@ export default class EntryAbility extends UIAbility {
     //     hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
     //   });
     // }
-    windowStage.loadContent('pages/2024-11-14/learn/H1_2024_11_15', (err) => {
+    windowStage.loadContent('pages/2024-11-13/learn/H1_2024_11_13', (err) => {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;

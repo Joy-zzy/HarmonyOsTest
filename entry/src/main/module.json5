@@ -9,6 +9,12 @@
       "tablet",
       "2in1"
     ],
+    "metadata": [
+      {
+        "name": "avoid_cutout",
+        "value": "true",
+      }
+    ],
     "requestPermissions": [{
       "name":"ohos.permission.INTERNET"
     }, {

@@ -1,9 +1,10 @@
 import { Business, Chat, Store } from './ChatStore'
-import { promptAction, router } from '@kit.ArkUI';
+import { promptAction, router, window } from '@kit.ArkUI';
 import { http } from '@kit.NetworkKit';
 import { notificationManager } from '@kit.NotificationKit';
 import wantAgent from '@ohos.app.ability.wantAgent';
 import { WantAgent } from '@kit.AbilityKit';
+import { util } from '@kit.ArkTS';
 
 class Response {
   result: number;
@@ -24,14 +25,21 @@ struct H1_Chat {
   @State chatList: Chat[] = [];
   store: Store = new Store(getContext(this));
   private list: Scroller = new ListScroller();
+  winClass: window.Window | undefined = undefined;
 
   async aboutToAppear() {
+    this.winClass = await window.getLastWindow(getContext(this));
+    this.winClass!.setWindowLayoutFullScreen(true);
+  }
+
+  async onPageShow() {
     if (!this.business) {
       this.business = router.getParams() as Business;
     }
     this.business.count = 0;
     this.chatList = await this.store.getMsg(this.business.id);
   }
+
 
   async getResponse() {
     const url="http://api.qingyunke.com/api.php?key=free&appid=0&msg="+this.msg;
@@ -40,7 +48,7 @@ struct H1_Chat {
       isSelf: false,
       msg: res.content,
       time: new Date().toLocaleTimeString(),
-      id: Date.now() + "",
+      id: util.generateRandomUUID(),
       ava: this.business!.ava,
       businessId: this.business!.id
     }
@@ -80,13 +88,14 @@ struct H1_Chat {
 
   build() {
     Column() {
-      Row() {
+      Stack({alignContent: Alignment.Start}) {
+        Text(this.business?.title).textAlign(TextAlign.Center).width('100%').height(50)
         Image('/images/cuo.png').width(32)
           .onClick(() => {
             router.back();
           })
-        Text(this.business?.title).textAlign(TextAlign.Center).width('calc(100% - 50vp)').height(50)
-      }.width('100%').backgroundColor('#fff').padding({left: 10}).margin({bottom: 15})
+      }.width('100%').backgroundColor('#fff').padding({left: 10, top: 23}).margin({bottom: 15})
+      .expandSafeArea([SafeAreaType.KEYBOARD])
       List({scroller: this.list}) {
         ForEach(this.chatList, (chat: Chat, index: number) => {
           ListItem() {
@@ -97,7 +106,8 @@ struct H1_Chat {
             }.width('100%').direction(chat.isSelf ? Direction.Rtl : Direction.Ltr).margin({bottom: 15})
           }
         })
-      }.width('100%').height('calc(100% - 115vp)').padding({bottom: 20})
+      }.width('100%').layoutWeight(1).padding({bottom: 20})
+      .expandSafeArea([SafeAreaType.KEYBOARD, SafeAreaType.SYSTEM])
       .edgeEffect(EdgeEffect.None).scrollBar(BarState.Off).padding({left: 10, right: 10})
       Row() {
         TextInput({
@@ -110,7 +120,7 @@ struct H1_Chat {
                 isSelf: true,
                 msg: this.msg,
                 time: new Date().toLocaleTimeString(),
-                id: Date.now() + "",
+                id: util.generateRandomUUID(),
                 ava: '/images/my.png',
                 businessId: this.business!.id
               }
@@ -122,7 +132,7 @@ struct H1_Chat {
               this.msg = '';
             }
           })
-      }.height(50).width('100%').padding({left: 10, right: 5})
+      }.height(50).width('100%').padding({left: 10, right: 5}).margin({bottom: 23})
     }.backgroundColor('#efefef')
   }
 }
