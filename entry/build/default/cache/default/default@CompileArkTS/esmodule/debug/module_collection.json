@@ -1,0 +1,22 @@
+{
+  "entry\\src\\main\\ets\\pages\\2024-11-13\\learn\\H1_2024_11_13.ets": [
+    "ohos.display",
+    "ohos.promptAction",
+    "ohos.router",
+    "ohos.window",
+    "ohos.notificationManager",
+    "ohos.util"
+  ],
+  "entry\\src\\main\\ets\\pages\\2024-11-13\\learn\\H1_Chat.ets": [
+    "ohos.router",
+    "ohos.window",
+    "ohos.net.http",
+    "ohos.notificationManager",
+    "ohos.app.ability.wantAgent",
+    "ohos.util"
+  ],
+  "entry\\src\\main\\ets\\pages\\2024-11-13\\learn\\ChatStore.ets": [
+    "ohos.data.preferences",
+    "ohos.util"
+  ]
+}
